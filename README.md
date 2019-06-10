@@ -6,7 +6,7 @@ A Python wrapper to simplify Cloudant DB search.
 * [Unittests](#unittests)
 
 ## Installation
-The wrapper uses base Python3.x libraries and the Cloudant Python Client only.
+The wrapper uses base Python3.x libraries and the [Cloudant Python Client](https://github.com/cloudant/python-cloudant) only.
 
 I suggest to use [virtualenv](https://www.pythonforbeginners.com/basics/how-to-use-python-virtualenv) with Python 3.x.
 After installing virtualenv create it:
