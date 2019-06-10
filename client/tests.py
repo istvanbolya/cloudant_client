@@ -3,7 +3,7 @@ from requests import HTTPError
 import unittest
 
 
-class TestStringMethods(unittest.TestCase):
+class TestCloudantDBClient(unittest.TestCase):
 
     def setUp(self):
         self.client = CloudantDBClient()
