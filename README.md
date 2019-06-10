@@ -27,4 +27,4 @@ Activate the env. and install packages:
 `pip install -r cloudant_client/requirements.txt`
     
  ## Usage
- You can find a sample, `use_client.py` how can you use the cleint and also which parameters are needed.
+ You can find a sample, `use_client.py` how can you use the client and also which parameters are needed.
