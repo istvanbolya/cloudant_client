@@ -22,7 +22,7 @@ class CloudantDBClient:
         """
         Connect to the Cloudant DB
         """
-        if self.connection:
+        if isinstance(self.connection, Cloudant):
             return
         self.connection = Cloudant(
             cloudant_user=username,
@@ -36,13 +36,15 @@ class CloudantDBClient:
         """
         Disconnect from the Cloudant DB
         """
-        if self.connection:
+        if isinstance(self.connection, Cloudant):
             self.connection.disconnect()
 
     def get_db(self, db_name):
         """
         Gets the current DB, if connected.
         """
+        if not isinstance(self.connection, Cloudant):
+            raise CloudantDBClientException('Not connected to any DB! Use "connect()" first!')
         self.db = self.connection[db_name]
 
     def _get_design_doc(self, ddoc_id):
@@ -68,11 +70,21 @@ class CloudantDBClient:
                                                                         self.design_doc['_id'])
             )
 
+    # TODO: define query parameters, Lucene syntax
+    def build_query(self, query_params):
+        """
+        Builds a Lucene query, based on incoming parameters
+
+        :param query_params dict: contains all parameters, in min-max value range
+        :return:
+        """
+        return
+
     def search(self, ddoc_id, index_name, query_params, sort):
         """
         Checks if the defined ddoc and index are exist, and runs the query on the index.
 
-        :param ddoc_id: DesignDocument Id , which contains the index
+        :param ddoc_id: DesignDocument Id, which contains the index
         :param index_name: Index name, which used in search
         :param query_params: Lucene query in raw string
         :param sort: one or more field name in string or in list of strings

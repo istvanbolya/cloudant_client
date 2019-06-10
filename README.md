@@ -30,7 +30,9 @@ Install packages:
 `pip install -r cloudant_client/requirements.txt`
     
  ## Usage
- You can find a sample, `cloudant_client/use_client.py` how can you use the client and also which parameters are needed.
+ You can find a sample script `use_client.py` how can you interact with the client and also which parameters are needed.
+ 
+ `python cloudant_client/use_client.py`
  
  ## Unittests
  You can run the unittests by executing the script under virtualenv:
