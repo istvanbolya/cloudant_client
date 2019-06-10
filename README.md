@@ -3,6 +3,7 @@ A Python wrapper to simplify Cloudant DB search.
 
 * [Installation](#installation)
 * [Usage](#usage)
+* [Unittests](#unittests)
 
 ## Installation
 The wrapper uses base Python3.x libraries and the Cloudant Python client only.
@@ -29,4 +30,9 @@ Install packages:
 `pip install -r cloudant_client/requirements.txt`
     
  ## Usage
- You can find a sample, `use_client.py` how can you use the client and also which parameters are needed.
+ You can find a sample, `cloudant_client/use_client.py` how can you use the client and also which parameters are needed.
+ 
+ ## Unittests
+ You can run the unittests by executing the script under virtualenv:
+ 
+ `python cloudant_client/client/tests.py`
