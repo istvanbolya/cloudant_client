@@ -1,1 +1,21 @@
-# cloudant_client
+# Cloudant DB Client
+A Python wrapper to simplify Cloudant DB search.
+
+* [Installation](#installation)
+* [Usage](#usage)
+
+## Installation
+
+I suggest to use [virtualenv](https://www.pythonforbeginners.com/basics/how-to-use-python-virtualenv) with Python 3.x to use the client.
+Checkout the source: 
+    git clone https://github.com/istvanbolya/cloudant_client.git
+Create virtualenv:
+    mkdir ~/cloudantdbclient
+    virtualenv ~/cloudantdbclient/venv
+Activate the env. and install packages:
+    cd ~/cloudantdbclient
+    source venv/bin/activate
+    pip install -r cloudant_client/requirements.txt
+    
+ ## Usage
+ You can find a sample, `use_client.py` how can you use the cleint and also which parameters are needed.
