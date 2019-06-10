@@ -1,4 +1,4 @@
-from database import CloudantDBClient
+from database import CloudantDBClient, CloudantDBClientException
 from requests import HTTPError
 import unittest
 
@@ -38,6 +38,25 @@ class TestStringMethods(unittest.TestCase):
         design_doc_exists = '_design/view1'
         self.client._get_design_doc(design_doc_exists)
         self.assertEqual(self.client.design_doc['_id'], design_doc_exists)
+
+    def test_get_index_missing(self):
+        self.client.get_db('airportdb')
+        design_doc_name = '_design/view1'
+        self.client._get_design_doc(design_doc_name)
+
+        index_missing = 'noindex'
+        with self.assertRaises(CloudantDBClientException) as context:
+            self.client._get_index(index_missing)
+        self.assertTrue('was not found' in str(context.exception))
+
+    def test_get_index_exists(self):
+        self.client.get_db('airportdb')
+        design_doc_name = '_design/view1'
+        self.client._get_design_doc(design_doc_name)
+
+        index_exists = 'geo'
+        self.client._get_index(index_exists)
+        self.assertTrue(isinstance(self.client.index, dict))
 
 
 if __name__ == '__main__':

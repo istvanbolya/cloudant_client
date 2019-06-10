@@ -4,6 +4,8 @@ DB_URL = 'https://mikerhodes.cloudant.com'
 DB_NAME = 'airportdb'
 DESIGN_DOC = '_design/view1'
 INDEX = 'geo'
+QUERY_PARAMS = 'lon:[0 TO 15] AND lat:[0 TO 5]'
+SORTING = ['lat', 'lon']
 
 
 def call_search():
@@ -15,8 +17,8 @@ def call_search():
     # client._get_index(INDEX)
     results = client.search(ddoc_id=DESIGN_DOC,
                             index_name=INDEX,
-                            query_params='lon:[0 TO 15] AND lat:[0 TO 5]',
-                            sort=['lat', 'lon'])
+                            query_params=QUERY_PARAMS,
+                            sort=SORTING)
     client.disconnect()
     return results
 
