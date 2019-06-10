@@ -1,6 +1,6 @@
-from database import CloudantDBClient, CloudantDBClientException
-from requests import HTTPError
 import unittest
+
+from database import CloudantDBClient, CloudantDBClientException
 
 
 class TestCloudantDBClient(unittest.TestCase):
@@ -14,9 +14,9 @@ class TestCloudantDBClient(unittest.TestCase):
 
     def test_get_db_missing(self):
         db_missing = 'nodbhere'
-        with self.assertRaises(HTTPError) as context:
+        with self.assertRaises(CloudantDBClientException) as context:
             self.client.get_db(db_missing)
-        self.assertTrue('Error' in str(context.exception))
+        self.assertTrue('Cannot get DB' in str(context.exception))
 
     def test_get_db_exists(self):
         db_exists = 'airportdb'

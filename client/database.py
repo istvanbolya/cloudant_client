@@ -1,4 +1,6 @@
 from cloudant.client import Cloudant
+from cloudant.database import CloudantDatabase
+from requests.exceptions import HTTPError
 
 
 class CloudantDBClientException(BaseException):
@@ -45,13 +47,20 @@ class CloudantDBClient:
         """
         if not isinstance(self.connection, Cloudant):
             raise CloudantDBClientException('Not connected to any DB! Use "connect()" first!')
-        self.db = self.connection[db_name]
+        try:
+            self.db = self.connection[db_name]
+        except HTTPError as req_exc:
+            self.db = None
+            raise CloudantDBClientException('Cannot get DB: "{}". Error: {}.'.format(
+                db_name,
+                req_exc
+            ))
 
     def _get_design_doc(self, ddoc_id):
         """
         Gets the current DesignDocument, if DB was set.
         """
-        if not self.db.exists():
+        if not isinstance(self.db, CloudantDatabase):
             raise CloudantDBClientException('Not connected to any DB')
         self.design_doc = self.db.get_design_document(ddoc_id)
         if not self.design_doc:
